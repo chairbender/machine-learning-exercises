@@ -18,6 +18,17 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
+h = sigmoid(X * theta);
+innerSum = -y .* log(h) - (1 - y) .* log(1 - h);
+% First column needs to be left out for regularization
+adjustment = (lambda / (2*m)) * sum(theta(2:end).^2);
+J = (1 / m) * sum(innerSum) + adjustment;
+
+%first column should not be regularized for the gradient
+gradAdjustment = (lambda / m) * theta;
+gradAdjustment(1) = 0;
+grad = (1 / m) * sum((h - y) .* X);
+grad = grad + gradAdjustment';
 
 
 

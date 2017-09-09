@@ -19,7 +19,7 @@ for iter = 1:num_iters
 
 
 
-
+    theta = gradientDescent(X, y, theta, alpha, num_iters);
 
 
 
